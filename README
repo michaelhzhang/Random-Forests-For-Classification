@@ -1,0 +1,10 @@
+Implementation of decision trees and random forests for classification. See code for more documentation.
+
+Example usage:
+
+feature_map = {0:'feature0',1:'feature1'}
+random_forest = RandomForest(num_trees=30,data_bagging_size=num_points,feature_bagging_criteria = lambda d: int(math.sqrt(d)),max_height=200,feature_name_map=feature_map)
+random_forest.train(training_features,training_labels)
+
+print random_forest
+validation_predictions = random_forest.predict(validation_features)
