@@ -8,7 +8,6 @@ class DecisionTree:
 
 	Implementation Notes:
 	- Does not store training data after training is finished to optimize memory."""
-	
 	def __init__(self,
 		feature_bagging_criteria = lambda d: d,
 		impurity_measure=ImpurityMeasures.entropy,
@@ -21,15 +20,15 @@ class DecisionTree:
 		):
 		"""Parameters:
 		* feature_bagging_criteria: a function of the form f(d) that given the number of features, returns m = the amount of features to train on in each split
-		* impurity measure: function of the form f(left_label_hist,right_label_hist) that measures the entropy of a node 
+		* impurity measure: function of the form f(left_label_hist,right_label_hist) that measures the entropy of a node
 		* The following are for stopping criteria:
 		- min_impurity_decrease: Minimum decrease in impurity needed on a split
 		- min_impurity: Minimum amount of impurity needed to continue splitting in a node
-		- max_percentage_in_class: Maximum amount of a node we can allocate to any 
+		- max_percentage_in_class: Maximum amount of a node we can allocate to any
 		- max_height: Maximum height of a tree. If max_height is None, then trees can grow arbitrarily big
 		- minimum number of data points we allow in a node. If less, stop splitting
 
-		* OPTIONAL: feature_name_map: dictionary that maps feature numbers to feature names. Useful for debugging + printing trees. 
+		* OPTIONAL: feature_name_map: dictionary that maps feature numbers to feature names. Useful for debugging + printing trees.
 		"""
 
 		self.feature_bagging_criteria = feature_bagging_criteria
@@ -73,7 +72,7 @@ class DecisionTree:
 			feature_name_map=self.feature_name_map)
 
 		self.root_node.train(data,labels,np.arange(self.num_points),
-			self.features_per_split) 
+			self.features_per_split)
 
 	def predict(self,data):
 		"""Given n x d test data, return a flat nparray of classifications."""
@@ -85,8 +84,8 @@ class DecisionTree:
 		return np.array(predictions)
 
 
-	def predict_point(self,data): 
-		"""Given a data point, traverse the tree to find the best label to classify the data point as. 
+	def predict_point(self,data):
+		"""Given a data point, traverse the tree to find the best label to classify the data point as.
 
 		Assumes data is d x 1, i.e. is a column vector."""
 		if (self.root_node is None):

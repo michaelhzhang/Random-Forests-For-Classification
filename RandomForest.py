@@ -22,14 +22,14 @@ class RandomForest:
 		* num_trees: The number of decision trees to train this random forest on
 		* data_bagging_size: The number of training points, sampled with replacement, with which to train each tree.
 		* feature_bagging_criteria: a function of the form f(d) that given the number of features, returns m = the amount of features to train on in each split
-		* impurity measure: function of the form f(left_label_hist,right_label_hist) that measures the entropy of a node 
+		* impurity measure: function of the form f(left_label_hist,right_label_hist) that measures the entropy of a node
 		* The following are for stopping criteria:
 		- min_impurity_decrease: Minimum decrease in impurity needed on a split
 		- min_impurity: Minimum amount of impurity needed to continue splitting in a node
-		- max_percentage_in_class: Maximum amount of a node we can allocate to any 
+		- max_percentage_in_class: Maximum amount of a node we can allocate to any
 		- max_height: Maximum height of a tree. If max_height is None, then trees can grow arbitrarily big
-		- minimum number of data points we allow in a node. If less, stop splitting		
-		* OPTIONAL: feature_name_map: dictionary that maps feature numbers to feature names. Useful for debugging + printing trees. 
+		- minimum number of data points we allow in a node. If less, stop splitting
+		* OPTIONAL: feature_name_map: dictionary that maps feature numbers to feature names. Useful for debugging + printing trees.
 		"""
 		self.num_trees = num_trees
 		self.data_bagging_size = data_bagging_size
@@ -73,11 +73,11 @@ class RandomForest:
 		Given n x d test data, return an nparray of classifications."""
 		if (len(self.trees) == 0):
 			raise Exception("Forest not trained")
-		
+
 		classifications = []
 		for i in xrange(data.shape[0]):
 			votes = defaultdict(int)
-			
+
 			for tree in self.trees:
 				to_predict = data[i]
 				to_predict = np.reshape(to_predict,(1,data.shape[1]))
@@ -111,7 +111,7 @@ class RandomForest:
 				threshold = sorted_counts[i][0][1]
 
 				if (self.feature_name_map is not None):
-					feature = self.feature_name_map[feature]	
+					feature = self.feature_name_map[feature]
 				print str(i) + '. ' + str(feature) + " <= " + str(threshold) + " (" + str(amount) + " trees)"
 
 

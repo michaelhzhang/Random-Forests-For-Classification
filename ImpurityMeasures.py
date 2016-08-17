@@ -1,6 +1,6 @@
 ### Library of impurity measures for use in training decision trees
 
-import numpy as np 
+import numpy as np
 import scipy as sc
 
 def entropy(left_label_hist,right_label_hist):
